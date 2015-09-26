@@ -1,0 +1,21 @@
+mysql> SELECT TABLE_SCHEMA,TABLE_NAME,INDEX_NAME,COLUMN_NAME,SEQ_IN_INDEX FROM information_schema.STATISTICS  WHERE TABLE_SCHEMA = 'isucon5q' ORDER BY TABLE_SCHEMA,TABLE_NAME,INDEX_NAME,SEQ_IN_INDEX;
++--------------+------------+--------------+--------------+--------------+
+| TABLE_SCHEMA | TABLE_NAME | INDEX_NAME   | COLUMN_NAME  | SEQ_IN_INDEX |
++--------------+------------+--------------+--------------+--------------+
+| isucon5q     | comments   | created_at   | created_at   |            1 |
+| isucon5q     | comments   | entry_id     | entry_id     |            1 |
+| isucon5q     | comments   | PRIMARY      | id           |            1 |
+| isucon5q     | entries    | created_at   | created_at   |            1 |
+| isucon5q     | entries    | PRIMARY      | id           |            1 |
+| isucon5q     | entries    | user_id      | user_id      |            1 |
+| isucon5q     | entries    | user_id      | created_at   |            2 |
+| isucon5q     | footprints | PRIMARY      | id           |            1 |
+| isucon5q     | profiles   | PRIMARY      | user_id      |            1 |
+| isucon5q     | relations  | friendship   | one          |            1 |
+| isucon5q     | relations  | friendship   | another      |            2 |
+| isucon5q     | relations  | PRIMARY      | id           |            1 |
+| isucon5q     | salts      | PRIMARY      | user_id      |            1 |
+| isucon5q     | users      | account_name | account_name |            1 |
+| isucon5q     | users      | email        | email        |            1 |
+| isucon5q     | users      | PRIMARY      | id           |            1 |
++--------------+------------+--------------+--------------+--------------+
