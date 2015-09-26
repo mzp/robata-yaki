@@ -194,16 +194,14 @@ SQL
     comments_for_me = db.xquery(comments_for_me_query, current_user[:id])
 
     entries_of_friends = []
-    db.query('SELECT * FROM entries ORDER BY created_at DESC LIMIT 1000').each do |entry|
-      next unless is_friend?(entry[:user_id])
+    db.xquery('SELECT * FROM entries WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])]).each do |entry|
       entry[:title] = entry[:body].split(/\n/).first
       entries_of_friends << entry
       break if entries_of_friends.size >= 10
     end
 
     comments_of_friends = []
-    db.query('SELECT * FROM comments ORDER BY created_at DESC LIMIT 1000').each do |comment|
-      next unless is_friend?(comment[:user_id])
+    db.xquery('SELECT * FROM comments WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])]).each do |comment|
       entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
       entry[:is_private] = (entry[:private] == 1)
       next if entry[:is_private] && !permitted?(entry[:user_id])
@@ -366,6 +364,7 @@ SQL
   end
 
   get '/initialize' do
+#    db.query("DELETE FROM relations WHERE id > 500000")
     system '/home/isucon/initialize.sh'
     db.query("DELETE FROM footprints WHERE id > 500000")
     db.query("DELETE FROM entries WHERE id > 500000")
