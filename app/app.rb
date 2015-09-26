@@ -278,9 +278,15 @@ SQL
     authenticated!
     owner = user_from_account(params['account_name'])
     query = if permitted?(owner[:id])
-              'SELECT * FROM entries WHERE user_id = ? ORDER BY created_at DESC LIMIT 20'
+              'SELECT e.id as id,e.user_id as user_id,e.private as private,e.body as body,e.created_at as created_at,count(c.id) as comment_count ' +
+              'FROM entries e ' +
+              'JOIN comments c ON e.id = c.entry_id ' +
+              'WHERE e.user_id = ? GROUP BY e.id, e.user_id,e.private,e.body,e.created_at ORDER BY e.created_at DESC LIMIT 20'
             else
-              'SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY created_at DESC LIMIT 20'
+              'SELECT e.id as id,e.user_id as user_id,e.private as private,e.body as body,e.created_at as created_at,count(c.id) as comment_count ' +
+              'FROM e.entries ' +
+              'JOIN comments c ON e.id = c.entry_id ' +
+              'WHERE e.user_id = ? AND e.private=0 GROUP BY e.id, e.user_id,e.private,e.body,e.created_at ORDER BY e.created_at DESC LIMIT 20'
             end
     entries = db.xquery(query, owner[:id])
       .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
