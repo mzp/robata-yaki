@@ -200,14 +200,14 @@ SQL
       break if entries_of_friends.size >= 10
     end
 
-    comments_of_friends = []
-    db.xquery('SELECT * FROM comments WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])]).each do |comment|
-      entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
-      entry[:is_private] = (entry[:private] == 1)
-      next if entry[:is_private] && !permitted?(entry[:user_id])
-      comments_of_friends << comment
-      break if comments_of_friends.size >= 10
+    comments_of_friends_map = {}
+    db.xquery('SELECT id, entry_id FROM comments WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])]).each do |comment|
+      comments_of_friends_map[comment[:entry_id]] = comment[:id]
     end
+    db.xquery('SELECT id, private, user_id FROM entries WHERE id in (?) limit 1000', comments_of_friends_map.keys).map do |entry|
+      comments_of_friends_map.remove(entry[:id]) if (entry[:private] == 1) && !permitted?(entry[:user_id])
+    end
+    comments_of_friends = db.query('SELECT * FROM comments where id in (?) ORDER BY created_at DESC LIMIT 10', comments_of_friends_map.values)
 
     friends = friends(current_user[:id]).map {|user_id| [user_id, Time.now]}
 
