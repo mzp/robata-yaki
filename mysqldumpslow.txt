@@ -1,0 +1,221 @@
+Count: 25  Time=2.41s (60s)  Lock=0.00s (0s)  Rows=10.0 (250), root[root]@localhost
+  SELECT c.id AS id, c.entry_id AS entry_id, c.user_id AS user_id, c.comment AS comment, c.created_at AS created_at
+  FROM comments c
+  JOIN entries e ON c.entry_id = e.id
+  WHERE e.user_id = 'S'
+  ORDER BY c.created_at DESC
+  LIMIT N
+
+Count: 33  Time=0.19s (6s)  Lock=0.00s (0s)  Rows=205.2 (6772), root[root]@localhost
+  SELECT * FROM relations WHERE one = 'S' OR another = 'S' ORDER BY created_at DESC
+
+Count: 25  Time=0.16s (4s)  Lock=0.00s (0s)  Rows=10.0 (250), root[root]@localhost
+  SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) AS updated
+  FROM footprints
+  WHERE user_id = 'S'
+  GROUP BY user_id, owner_id, DATE(created_at)
+  ORDER BY updated DESC
+  LIMIT N
+
+Count: 298  Time=0.01s (2s)  Lock=0.00s (0s)  Rows=1.0 (298), root[root]@localhost
+  SELECT * FROM entries WHERE id = 'S'
+
+Count: 25786  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=1.0 (25786), root[root]@localhost
+  SELECT COUNT(N) AS cnt FROM relations WHERE (one = 'S' AND another = 'S') OR (one = 'S' AND another = 'S')
+
+Count: 30  Time=0.04s (1s)  Lock=0.00s (0s)  Rows=5.0 (150), root[root]@localhost
+  SELECT * FROM entries WHERE user_id = 'S' ORDER BY created_at LIMIT N
+
+Count: 5  Time=0.23s (1s)  Lock=0.00s (0s)  Rows=20.0 (100), root[root]@localhost
+  SELECT * FROM entries WHERE user_id = 'S' AND private=N ORDER BY created_at DESC LIMIT N
+
+Count: 5  Time=0.16s (0s)  Lock=0.00s (0s)  Rows=50.0 (250), root[root]@localhost
+  SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) as updated
+  FROM footprints
+  WHERE user_id = 'S'
+  GROUP BY user_id, owner_id, DATE(created_at)
+  ORDER BY updated DESC
+  LIMIT N
+
+Count: 9  Time=0.07s (0s)  Lock=0.00s (0s)  Rows=5.0 (45), root[root]@localhost
+  SELECT * FROM entries WHERE user_id = 'S' AND private=N ORDER BY created_at LIMIT N
+
+Count: 25  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=1000.0 (25000), root[root]@localhost
+  SELECT * FROM entries ORDER BY created_at DESC LIMIT N
+
+Count: 10  Time=0.03s (0s)  Lock=0.00s (0s)  Rows=20.0 (200), root[root]@localhost
+  SELECT * FROM entries WHERE user_id = 'S' ORDER BY created_at DESC LIMIT N
+
+Count: 25  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1000.0 (25000), root[root]@localhost
+  SELECT * FROM comments ORDER BY created_at DESC LIMIT N
+
+Count: 2362  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (2362), root[root]@localhost
+  SELECT * FROM users WHERE id = 'S'
+
+Count: 5  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO entries (user_id, private, body) VALUES ('S','S','S')
+
+Count: 27  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO footprints (user_id,owner_id) VALUES ('S','S')
+
+Count: 300  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (300), root[root]@localhost
+  SELECT COUNT(*) AS c FROM comments WHERE entry_id = 'S'
+
+Count: 40  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (40), root[root]@localhost
+  SELECT * FROM profiles WHERE user_id = 'S'
+
+Count: 250  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (250), root[root]@localhost
+  SELECT * FROM entries WHERE id='S'
+
+Count: 5  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO comments (entry_id, user_id, comment) VALUES ('S','S','S')
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=4.0 (4), root[root]@localhost
+  show databases
+
+Count: 97  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (97), root[root]@localhost
+  SELECT id, account_name, nick_name, email FROM users WHERE id='S'
+
+Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SHOW TRIGGERS LIKE 'S'
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO relations (one, another) VALUES ('S','S'), ('S','S')
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  UPDATE profiles
+  SET first_name='S', last_name='S', sex='S', birthday='S', pref='S', updated_at=CURRENT_TIMESTAMP()
+  WHERE user_id = 'S'
+
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.9 (15), root[root]@localhost
+  SELECT u.id AS id, u.account_name AS account_name, u.nick_name AS nick_name, u.email AS email
+  FROM users u
+  JOIN salts s ON u.id = s.user_id
+  WHERE u.email = 'S' AND u.passhash = SHA2(CONCAT('S', s.salt), N)
+
+Count: 33  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (33), root[root]@localhost
+  SELECT * FROM users WHERE account_name = 'S'
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM relations WHERE id > N
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM entries WHERE id > N
+
+Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), root[root]@localhost
+  show table status like 'S'
+
+Count: 56  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SET SESSION character_set_results = 'S'
+
+Count: 4  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.5 (2), root[root]@localhost
+  SHOW VARIABLES LIKE 'S'
+
+Count: 16  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.1 (18), root[root]@localhost
+  SELECT * FROM comments WHERE entry_id = 'S'
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM comments WHERE id > N
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM footprints WHERE id > N
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SELECT DISTINCT TABLESPACE_NAME, FILE_NAME, LOGFILE_GROUP_NAME, EXTENT_SIZE, INITIAL_SIZE, ENGINE FROM INFORMATION_SCHEMA.FILES WHERE FILE_TYPE = 'S' AND TABLESPACE_NAME IN (SELECT DISTINCT TABLESPACE_NAME FROM INFORMATION_SCHEMA.PARTITIONS WHERE TABLE_SCHEMA IN ('S')) ORDER BY TABLESPACE_NAME, LOGFILE_GROUP_NAME
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (10), root[root]@localhost
+  show fields from `comments`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (10), root[root]@localhost
+  show fields from `entries`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=7.0 (14), root[root]@localhost
+  show fields from `profiles`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=4.0 (8), root[root]@localhost
+  show fields from `footprints`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=5.0 (10), root[root]@localhost
+  show fields from `users`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=4.0 (8), root[root]@localhost
+  show fields from `relations`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=2.0 (4), root[root]@localhost
+  show fields from `salts`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SELECT LOGFILE_GROUP_NAME, FILE_NAME, TOTAL_EXTENTS, INITIAL_SIZE, ENGINE, EXTRA FROM INFORMATION_SCHEMA.FILES WHERE FILE_TYPE = 'S' AND FILE_NAME IS NOT NULL AND LOGFILE_GROUP_NAME IN (SELECT DISTINCT LOGFILE_GROUP_NAME FROM INFORMATION_SCHEMA.FILES WHERE FILE_TYPE = 'S' AND TABLESPACE_NAME IN (SELECT DISTINCT TABLESPACE_NAME FROM INFORMATION_SCHEMA.PARTITIONS WHERE TABLE_SCHEMA IN ('S'))) GROUP BY LOGFILE_GROUP_NAME, FILE_NAME, ENGINE ORDER BY LOGFILE_GROUP_NAME
+
+Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (14), root[root]@localhost
+  select @@collation_database
+
+Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SET SQL_QUOTE_SHOW_CREATE=N
+
+Count: 14  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  use `isucon5q`
+
+Count: 3  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=7.0 (21), root[root]@localhost
+  show tables
+
+Count: 7  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  set global long_query_time = N
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  /*!N SET @@SQL_MODE='S' */
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  SELECT DATABASE()
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `comments`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  select @@version_comment limit N
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `footprints`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `entries`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `users`
+
+Count: 6  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.2 (1), root[root]@localhost
+  #
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `profiles`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  set global slow_query_log = N
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `salts`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  show create table `relations`
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  /*!N SET TIME_ZONE='S' */
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SET NAMES utf8
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  UNLOCK TABLES
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  LOCK TABLES `comments` READ /*!N LOCAL */,`entries` READ /*!N LOCAL */,`footprints` READ /*!N LOCAL */,`profiles` READ /*!N LOCAL */,`relations` READ /*!N LOCAL */,`salts` READ /*!N LOCAL */,`users` READ /*!N LOCAL */
+
+Count: 3  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Init DB
+
+Count: 3  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Quit
+
