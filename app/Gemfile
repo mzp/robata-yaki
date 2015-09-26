@@ -8,4 +8,6 @@ gem "erubis"
 gem "unicorn"
 gem 'redis'
 gem 'hiredis'
+
 gem 'stackprof'
+gem 'gctools'
