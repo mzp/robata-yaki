@@ -4,6 +4,8 @@ require 'mysql2-cs-bind'
 require 'tilt/erubis'
 require 'erubis'
 require 'redis'
+require 'hiredis'
+require 'redis/connection/hiredis'
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -41,7 +43,7 @@ class Isucon5::WebApp < Sinatra::Base
     def redis
       return Thread.current[:isucon5_redis] if Thread.current[:isucon5_redis]
 
-      redis = Redis.new(:path => "/tmp/redis.sock")
+      redis = Redis.new(:path => "/dev/shm/redis.sock")
       Thread.current[:isucon5_redis] = redis
       redis
     end
