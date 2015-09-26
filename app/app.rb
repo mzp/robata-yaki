@@ -6,6 +6,7 @@ require 'erubis'
 require 'redis'
 require 'hiredis'
 require 'redis/connection/hiredis'
+load 'users.rb'
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -99,13 +100,15 @@ SQL
     end
 
     def get_user(user_id)
-      user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+#      user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+      user = $user_from_id[user_id.to_s]
       raise Isucon5::ContentNotFound unless user
       user
     end
 
     def user_from_account(account_name)
-      user = db.xquery('SELECT * FROM users WHERE account_name = ?', account_name).first
+#      user = db.xquery('SELECT * FROM users WHERE account_name = ?', account_name).first
+      user = $user_from_account[account_name]
       raise Isucon5::ContentNotFound unless user
       user
     end
