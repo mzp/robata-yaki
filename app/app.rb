@@ -206,12 +206,17 @@ SQL
     end
 
     comments_of_friends = []
-    db.xquery('SELECT * FROM comments WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])]).each do |comment|
-      entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
+    comments_of_friends = db.xquery('SELECT * FROM comments WHERE user_id in (?) ORDER BY created_at DESC LIMIT 10', [friends(current_user[:id])])
+
+    entries = {}
+    db.xquery('SELECT id, private, user_id FROM entries WHERE id in (?)', [comments_of_friends.map {|c| c[:entry_id]}]).each do|x|
+      entries[x[:id]] = x
+    end
+
+    comments_of_friend.delete_if do |comment|
+      entry = entries[comment[:entry_id]]
       entry[:is_private] = (entry[:private] == 1)
-      next if entry[:is_private] && !permitted?(entry[:user_id])
-      comments_of_friends << comment
-      break if comments_of_friends.size >= 10
+      entry[:is_private] && !permitted?(entry[:user_id])
     end
 
     friends = friends(current_user[:id]).map {|user_id| [user_id, Time.now]}
