@@ -3,9 +3,9 @@ http://www.hping.org/visitors for more information
 
 === General information ===
 --- Information about analyzed log files
---- Generated: Sat Sep 26 11:57:59 2015
+--- Generated: Sat Sep 26 13:44:12 2015
 
-* Number of entries processed: 338
+* Number of entries processed: 745
 * Number of invalid entries: 0
 * Processing time in seconds: 0
 
@@ -39,33 +39,33 @@ http://www.hping.org/visitors for more information
 
 === Unique visitors in each day ===
 --- Multiple hits with the same IP, user agent and access day, are considered a single visit
-* Number of unique visitors: 7
+* Number of unique visitors: 2
 * Different days in logfile: 1
-   26/Sep/2015 : 7         |############################################ 100.0%
+   26/Sep/2015 : 2         |############################################ 100.0%
 
 === Unique visitors in each month ===
 --- Multiple hits with the same IP, user agent and access day, are considered a single visit
-* Number of unique visitors: 7
+* Number of unique visitors: 2
 * Different months in logfile: 1
-   Sep/2015    : 7         |############################################ 100.0%
+   Sep/2015    : 2         |############################################ 100.0%
 
 === Unique visitors from Google in each day ===
 --- The red part of the bar expresses the percentage of visits originated from Google
-* Number of unique visitors: 7
+* Number of unique visitors: 2
 * Number of unique visitors from google: 0
 * Different days in logfile: 1
    26/Sep/2015: 0          |............................................ 0.0%
 
 === Unique visitors from Google in each month ===
 --- The red part of the bar expresses the percentage of visits originated from Google
-* Number of unique visitors: 7
+* Number of unique visitors: 2
 * Number of unique visitors from google: 0
 * Different months in logfile: 1
    Sep/2015: 0          |............................................ 0.0%
 
 === Weekday-Hour combined map ===
 --- Brighter means higher level of hits
-* Hour with max traffic starting at Sa 11:00 with hits: 7
+* Hour with max traffic starting at Sa 13:00 with hits: 2
 * Hour with min traffic starting at Mo 00:00 with hits: 0
 
              Mo:                         
@@ -73,7 +73,7 @@ http://www.hping.org/visitors for more information
              We:                         
              Th:                         
              Fr:                         
-             Sa:            #            
+             Sa:              #          
              Su:                         
 
                  000000000011111111112222
@@ -82,8 +82,8 @@ http://www.hping.org/visitors for more information
 
 === Month-Day combined map ===
 --- Brighter means higher level of hits
-* Day with max traffic is Sep 26 with hits: 7
-* Day with min traffic is Sep 26 with hits: 7
+* Day with max traffic is Sep 26 with hits: 2
+* Day with min traffic is Sep 26 with hits: 2
 
             Jan:                                
             Feb:                                
@@ -104,47 +104,43 @@ http://www.hping.org/visitors for more information
 
 === Pageviews per visit ===
 --- Number of pages requested per visit
-* Only documents are counted (not images). Reported ranges:: 5
-   > 30        : 3         |############################################ 42.9%
-   7           : 1         |##############                               14.3%
-   3           : 1         |##############                               14.3%
-   8           : 1         |##############                               14.3%
-   6           : 1         |##############                               14.3%
+* Only documents are counted (not images). Reported ranges:: 2
+   > 30        : 1         |############################################ 50.0%
+   6           : 1         |############################################ 50.0%
 
 === Requested pages ===
 --- Page requests ordered by hits
-* Different pages requested: 62
-1)    /: 83
-2)    /login: 77
-3)    /friends: 13
-4)    /diary/entry/947: 11
-5)    /logout: 9
-6)    /footprints: 8
-7)    /diary/entry: 6
-8)    /diary/entry/494262: 6
-9)    /diary/entries/mathias_leuschke1854: 6
-10)    /initialize: 4
-11)    /profile/mathias_leuschke1854: 4
-12)    /diary/entries/lynn_roob1189: 3
-13)    /diary/entries/jimmy_dibbert3793: 3
-14)    /profile/sibyl_konopelski1856uaoneuhaoeuoa: 3
-15)    /diary/entry/490376: 3
-16)    /diary/entry/500002: 3
-17)    /diary/entries/hannah_blick1571: 3
-18)    /profile/lynn_roob1189: 3
-19)    /diary/entry/493040: 3
-20)    /diary/entry/500001: 3
+* Different pages requested: 110
+1)    /: 148
+2)    /login: 106
+3)    /friends: 51
+4)    /footprints: 33
+5)    /diary/entry: 32
+6)    /logout: 32
+7)    /diary/entries/markus_streich1049: 12
+8)    /diary/entries/kaleb_cartwright3736: 12
+9)    /profile/markus_streich1049: 10
+10)    /diary/entries/yesenia3951: 9
+11)    /profile/kaleb_cartwright3736: 9
+12)    /diary/entries/denis4666: 9
+13)    /diary/entry/497824: 9
+14)    /profile/yesenia3951: 8
+15)    /profile/denis4666: 7
+16)    /profile/verona3627: 7
+17)    /diary/entries/theresa_bruen3114: 6
+18)    /diary/entry/490628: 6
+19)    /diary/entry/498140: 6
+20)    /diary/entries/verona3627: 6
 
 === Requested images and CSS ===
 --- Images and CSS requests ordered by hits
-* Different images and CSS requested: 2
-1)    /css/bootstrap.min.css: 21
-2)    /favicon.ico: 5
+* Different images and CSS requested: 1
+1)    /css/bootstrap.min.css: 1
 
 === Referers ===
 --- Referers ordered by visits (google excluded)
 * Different referers: 1
-1)    none: 7
+1)    none: 2
 
 === Referers by first time ===
 --- Referers ordered by first time date, newer on top (referers from google excluded)
@@ -157,36 +153,31 @@ http://www.hping.org/visitors for more information
 
 === User agents ===
 --- The entire user agent string ordered by visits
-* Different agents: 6
-1)    Isucon5q bench: 2
+* Different agents: 2
+1)    Isucon5q bench: 1
 2)    Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36: 1
-3)    Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36: 1
-4)    Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/600.8.9 (KHTML, like Gecko) Version/8.0.8 Safari/600.8.9: 1
-5)    Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36: 1
-6)    Ruby: 1
 
 === Operating Systems ===
 --- Operating Systems by visits
 * Different operating systems listed: 2
-   Macintosh   : 4         |############################################ 57.1%
-   Unknown     : 3         |#################################            42.9%
+   Macintosh   : 1         |############################################ 50.0%
+   Unknown     : 1         |############################################ 50.0%
 
 === Browsers ===
 --- Browsers used by visits
 * Different browsers listed: 2
-   Safari      : 4         |############################################ 57.1%
-   Unknown     : 3         |#################################            42.9%
+   Safari      : 1         |############################################ 50.0%
+   Unknown     : 1         |############################################ 50.0%
 
 === 404 Errors ===
 --- Requests for missing documents
-* Different missing documents requested: 2
-1)    /favicon.ico: 5
-2)    /profile/sibyl_konopelski1856uaoneuhaoeuoa: 3
+* Different missing documents requested: 1
+1)    /diary/entry/500058: 1
 
 === Domains ===
 --- Top Level Domains sorted by visits
 * Total number of Top Level Domains: 1
-   numeric IP  : 7         |############################################ 100.0%
+   numeric IP  : 2         |############################################ 100.0%
 
 === Googled pages ===
 --- Pages accessed by the Google crawler, last access reported
@@ -215,7 +206,7 @@ http://www.hping.org/visitors for more information
    We          : 0         |                                             0.0%
    Th          : 0         |                                             0.0%
    Fr          : 0         |                                             0.0%
-   Sa          : 7         |############################################ 100.0%
+   Sa          : 2         |############################################ 100.0%
    Su          : 0         |                                             0.0%
 
 === Hours distribution ===
@@ -231,9 +222,9 @@ http://www.hping.org/visitors for more information
    08          : 0         |                                             0.0%
    09          : 0         |                                             0.0%
    10          : 0         |                                             0.0%
-   11          : 7         |############################################ 100.0%
+   11          : 0         |                                             0.0%
    12          : 0         |                                             0.0%
-   13          : 0         |                                             0.0%
+   13          : 2         |############################################ 100.0%
    14          : 0         |                                             0.0%
    15          : 0         |                                             0.0%
    16          : 0         |                                             0.0%
