@@ -286,13 +286,13 @@ SQL
               'SELECT ent.id as id,ent.user_id as user_id,ent.private as privat0e,ent.body as body,ent.created_at as created_at,count(c.id) as comment_count ' +
               'from (SELECT * FROM entries WHERE user_id = ? ORDER BY created_at DESC LIMIT 20) ent ' +
               'left join comments c ON ent.id = c.entry_id ' +
-              'GROUP BY ent.id, ent.user_id,ent.private,ent.body,ent.created_at' +
+              'GROUP BY ent.id, ent.user_id,ent.private,ent.body,ent.created_at ' +
               'ORDER BY ent.created_at desc'
             else
               'SELECT ent.id as id,ent.user_id as user_id,ent.private as privat0e,ent.body as body,ent.created_at as created_at,count(c.id) as comment_count ' +
               'from (SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY created_at DESC LIMIT 20) ent ' +
               'left join comments c ON ent.id = c.entry_id ' +
-              'GROUP BY ent.id, ent.user_id,ent.private,ent.body,ent.created_at' +
+              'GROUP BY ent.id, ent.user_id,ent.private,ent.body,ent.created_at ' +
               'ORDER BY ent.created_at desc'
             end
     entries = db.xquery(query, owner[:id])
