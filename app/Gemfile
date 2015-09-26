@@ -7,3 +7,5 @@ gem "mysql2-cs-bind"
 gem "erubis"
 gem "unicorn"
 gem 'redis'
+
+gem 'stackprof'
