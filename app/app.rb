@@ -3,6 +3,7 @@ require 'mysql2'
 require 'mysql2-cs-bind'
 require 'tilt/erubis'
 require 'erubis'
+require 'redis'
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -35,6 +36,14 @@ class Isucon5::WebApp < Sinatra::Base
           database: ENV['ISUCON5_DB_NAME'] || 'isucon5q',
         },
       }
+    end
+
+    def redis
+      return Thread.current[:isucon5_redis] if Thread.current[:isucon5_redis]
+
+      redis = Redis.new(:path => "/tmp/redis.sock")
+      Thread.current[:isucon5_redis] = redis
+      redis
     end
 
     def db
@@ -101,9 +110,11 @@ SQL
 
     def is_friend?(another_id)
       user_id = session[:user_id]
-      query = 'SELECT COUNT(1) AS cnt FROM relations WHERE (one = ? AND another = ?) OR (one = ? AND another = ?)'
-      cnt = db.xquery(query, user_id, another_id, another_id, user_id).first[:cnt]
-      cnt.to_i > 0 ? true : false
+      friends(user_id).include? another_id.to_s
+    end
+
+    def friends(user_id)
+      redis.lrange("friend:#{user_id}", 0, -1)
     end
 
     def is_friend_account?(account_name)
@@ -198,13 +209,7 @@ SQL
       break if comments_of_friends.size >= 10
     end
 
-    friends_query = 'SELECT * FROM relations WHERE one = ? OR another = ? ORDER BY created_at DESC'
-    friends_map = {}
-    db.xquery(friends_query, current_user[:id], current_user[:id]).each do |rel|
-      key = (rel[:one] == current_user[:id] ? :another : :one)
-      friends_map[rel[key]] ||= rel[:created_at]
-    end
-    friends = friends_map.map{|user_id, created_at| [user_id, created_at]}
+    friends = friends(current_user[:id]).map {|user_id| [user_id, Time.now]}
 
     query = <<SQL
 SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) AS updated
@@ -337,13 +342,9 @@ SQL
 
   get '/friends' do
     authenticated!
-    query = 'SELECT * FROM relations WHERE one = ? OR another = ? ORDER BY created_at DESC'
-    friends = {}
-    db.xquery(query, current_user[:id], current_user[:id]).each do |rel|
-      key = (rel[:one] == current_user[:id] ? :another : :one)
-      friends[rel[key]] ||= rel[:created_at]
-    end
-    list = friends.map{|user_id, created_at| [user_id, created_at]}
+
+    # current_user の友だちリスト
+    list = friends(current_user[:id]).map {|user_id| [user_id, Time.now]}
     erb :friends, locals: { friends: list }
   end
 
@@ -354,13 +355,16 @@ SQL
       unless user
         raise Isucon5::ContentNotFound
       end
-      db.xquery('INSERT INTO relations (one, another) VALUES (?,?), (?,?)', current_user[:id], user[:id], user[:id], current_user[:id])
+
+      # redis.lrange("friend:#{user_id}", 0, -1)
+      redis.rpush "friend:#{current_user[:id]}", user[:id]
+      redis.rpush "friend:#{user[:id]}", current_user[:id]
       redirect '/friends'
     end
   end
 
   get '/initialize' do
-    db.query("DELETE FROM relations WHERE id > 500000")
+    system '/home/isucon/initialize.sh'
     db.query("DELETE FROM footprints WHERE id > 500000")
     db.query("DELETE FROM entries WHERE id > 500000")
     db.query("DELETE FROM comments WHERE id > 1500000")
