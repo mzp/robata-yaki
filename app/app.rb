@@ -7,6 +7,7 @@ require 'redis'
 require 'hiredis'
 require 'redis/connection/hiredis'
 load 'users.rb'
+require 'digest/sha2'
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -65,18 +66,15 @@ class Isucon5::WebApp < Sinatra::Base
     end
 
     def authenticate(email, password)
-      query = <<SQL
-SELECT u.id AS id, u.account_name AS account_name, u.nick_name AS nick_name, u.email AS email
-FROM users u
-JOIN salts s ON u.id = s.user_id
-WHERE u.email = ? AND u.passhash = SHA2(CONCAT(?, s.salt), 512)
-SQL
-      result = db.xquery(query, email, password).first
-      unless result
+      user = user_from_email(email)
+      unless user
         raise Isucon5::AuthenticationError
       end
-      session[:user_id] = result[:id]
-      result
+      unless user[:passhash] == Digest::SHA512.hexdigest(password + user[:salt])
+        raise Isucon5::AuthenticationError
+      end
+      session[:user_id] = user[:id]
+      user
     end
 
     def current_user
@@ -111,6 +109,10 @@ SQL
       user = $user_from_account[account_name]
       raise Isucon5::ContentNotFound unless user
       user
+    end
+
+    def user_from_email(email)
+      user_from_account(email.sub("@isucon.net", ''))
     end
 
     def is_friend?(another_id)
@@ -316,7 +318,7 @@ SQL
 
   post '/diary/comment/:entry_id' do
     authenticated!
-    entry = db.xquery('SELECT * FROM entries WHERE id = ?', params['entry_id']).first
+    entry = db.xquery('SELECT id,private,user_id FROM entries WHERE id = ?', params['entry_id']).first
     unless entry
       raise Isucon5::ContentNotFound
     end
