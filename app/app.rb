@@ -261,7 +261,7 @@ SQL
     end
     args = [params['first_name'], params['last_name'], params['sex'], params['birthday'], params['pref']]
 
-    prof = db.xquery('SELECT id FROM profiles WHERE user_id = ?', current_user[:id]).first
+    prof = db.xquery('SELECT * FROM profiles WHERE user_id = ?', current_user[:id]).first
     if prof
       query = <<SQL
 UPDATE profiles
