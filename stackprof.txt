@@ -1,0 +1,36 @@
+==================================
+  Mode: wall(500)
+  Samples: 116414 (6.66% miss rate)
+  GC: 11073 (9.51%)
+==================================
+     TOTAL    (pct)     SAMPLES    (pct)     FRAME
+     32919  (28.3%)       32919  (28.3%)     block in Mysql2::Client#query
+     20897  (18.0%)       20831  (17.9%)     Redis::Connection::SocketMixin#read
+     28461  (24.4%)       20520  (17.6%)     Redis::Connection::SocketMixin#gets
+     87284  (75.0%)        6602   (5.7%)     Redis::Connection::Ruby#format_reply
+      4739   (4.1%)        4739   (4.1%)     rescue in Redis::Connection::SocketMixin#_read_from_socket
+     27125  (23.3%)        3292   (2.8%)     Redis::Connection::Ruby#format_bulk_reply
+      8007   (6.9%)        3268   (2.8%)     Redis::Connection::SocketMixin#_read_from_socket
+      2936   (2.5%)        2936   (2.5%)     Redis::Connection::CommandHelper#encode
+     94733  (81.4%)        2732   (2.3%)     block in <class:WebApp>
+      2496   (2.1%)        1518   (1.3%)     Redis::Connection::Ruby#write
+     68084  (58.5%)         835   (0.7%)     Isucon5::WebApp#is_friend?
+       615   (0.5%)         615   (0.5%)     block in Redis::Connection::CommandHelper#build_command
+       430   (0.4%)         430   (0.4%)     Rack::Request#session
+       978   (0.8%)         363   (0.3%)     Redis::Connection::CommandHelper#build_command
+     65884  (56.6%)         313   (0.3%)     Redis::Client#logging
+       280   (0.2%)         280   (0.2%)     MonitorMixin#mon_enter
+       407   (0.3%)         242   (0.2%)     Erubis::XmlHelper#escape_xml
+       204   (0.2%)         204   (0.2%)     Mysql2::Client.pseudo_bind
+    115943  (99.6%)         198   (0.2%)     Redis::Connection::Ruby#read
+       186   (0.2%)         186   (0.2%)     Isucon5::WebApp#redis
+     53557  (46.0%)         171   (0.1%)     Redis::Connection::Ruby#format_multi_bulk_reply
+       257   (0.2%)         125   (0.1%)     Rack::Session::Abstract::SessionHash#[]
+      1801   (1.5%)         113   (0.1%)     Isucon5::WebApp#get_user
+     53386  (45.9%)         109   (0.1%)     block in Redis::Connection::Ruby#format_multi_bulk_reply
+       109   (0.1%)         109   (0.1%)     Isucon5::TimeWithoutZone#to_s
+      2611   (2.2%)         105   (0.1%)     block (3 levels) in Redis::Client#process
+       105   (0.1%)         105   (0.1%)     MonitorMixin#mon_check_owner
+        97   (0.1%)          97   (0.1%)     Rack::Session::Abstract::SessionHash#loaded?
+     65568  (56.3%)          92   (0.1%)     Redis::Client#ensure_connected
+       192   (0.2%)          87   (0.1%)     MonitorMixin#mon_exit
